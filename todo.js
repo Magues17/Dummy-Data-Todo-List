@@ -61,7 +61,7 @@ ol.appendChild(li);
             filtered.forEach((todo) => {
                 const listItemElement = document.createElement("li");
 
-                    const textNode = document.createTextNode(todo.task);
+                    const textNode = document.createTextNode(todo.title);
 
                          listItemElement.appendChild(textNode);
 
@@ -73,18 +73,39 @@ ol.appendChild(li);
   
 
     const filterTodos = () => {
-        // return arrayOfTodos.length
-        let filteredByUserId = arrayOfTodos.filter((todo) => {
-            let userId = 2
-            //return todo
-            if (todo.userId === userId && todo.completed) {
-                return todo
-            }
+        const userIdInput = document.getElementById("userId-input");
+        const userId = parseInt(userIdInput.value);
+      
+        let filtered = [];
+        for (let index = 0; index < arrayOfTodos.length; index++) {
+          const todo = arrayOfTodos[index];
+          if (todo.userId === userId) {
+            filtered.push(todo);
+          }
+        }
+        console.log("filtered:", filtered);
+      
+       
+        const filteredTodosElement = document.getElementById("filtered-todos");
+      
+        filteredTodosElement.innerHTML = "";
+      
         
-        })
-        console.log('filteredByUserId:', filteredByUserId)
-    }
+        filtered.forEach((todo) => {
+          const listItemElement = document.createElement("li");
+          const textNode = document.createTextNode(todo.title);
+          listItemElement.appendChild(textNode);
+          filteredTodosElement.appendChild(listItemElement);
+        });
+        
 
+    };
 
-
+let clearlist = () => {
+    const filteredTodosElement = document.getElementById("filtered-todos");
+    const todoListElement = document.getElementById("todo-list")
+        filteredTodosElement.innerHTML = "";
+        todoListElement.innerHTML = "";
+        
+    };
 
